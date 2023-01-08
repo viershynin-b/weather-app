@@ -116,6 +116,7 @@ const StyledDetailesPage = styled.div`
       height: calc(100vh - 50px);
       border-top: none;
       @media screen and (max-width: 1000px) {
+        height: fit-content;
         margin: 0;
         width: 100%;
         padding: 25px 50px;

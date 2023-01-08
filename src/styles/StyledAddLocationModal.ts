@@ -22,6 +22,9 @@ const StyledAddLocationModal = styled(Dialog)`
     overflow-y: auto;
     box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%),
       0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
+    @media screen and (max-width: 400px) {
+      width: 210px;
+    }
     .drop-down-city-list__item {
       cursor: pointer;
       padding: 3px;

@@ -4,12 +4,16 @@ const StyledWeatherWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding: 80px 20px 20px;
+  width: 100%;
+  box-sizing: border-box;
 
   .no-cards-placeholder {
     width: 100%;
     text-align: center;
     color: rgba(0, 0, 0, 0.5);
     font-style: italic;
+    margin: 150px 0;
+    color: white;
   }
   .card__wrapper {
     display: flex;

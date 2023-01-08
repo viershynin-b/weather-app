@@ -1,7 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 
-
 import MainHeader from "../UI/MainHeader";
 
 describe("Test Index component", () => {
