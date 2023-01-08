@@ -1,8 +1,5 @@
 import axios from "axios";
-
 import * as Interfaces from "./Interfaces";
-import { API_KEY_WEATHER } from "./GLOBAL_VARS";
-
 
 interface techCityList extends Interfaces.ICityList {
   local_names?: { [key: string]: string };
@@ -20,7 +17,7 @@ export const getLocalWeather = async (
 }> => {
   try {
     const res = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY_WEATHER}`
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=40605066fb972a6375769d64d6e10591`
     );
     if (res.status === 200) {
       const getIANATimezone = (utcOffsetSeconds: number) => {
@@ -67,7 +64,7 @@ export const getCityCoordinates = async (
 }> => {
   try {
     const res = await axios.get(
-      `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${API_KEY_WEATHER}`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=40605066fb972a6375769d64d6e10591`
     );
     if (res.status === 200) {
       res.data.map((location: techCityList) => {
@@ -107,7 +104,7 @@ export const getHourlyLocalWeather = async (
 }> => {
   try {
     const res = await axios.get(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY_WEATHER}`
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=40605066fb972a6375769d64d6e10591`
     );
     if (res.status === 200) {
       return {

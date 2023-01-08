@@ -1,5 +1,3 @@
-export const API_KEY_WEATHER = "40605066fb972a6375769d64d6e10591";
-
 export const PRIMARY_CITY_LIST = [
   { country: "US", name: "Washington", lat: 38.8950368, lon: -77.0365427 },
   { country: "IL", name: "Jerusalem", lat: 31.771959, lon: 35.217018 },
