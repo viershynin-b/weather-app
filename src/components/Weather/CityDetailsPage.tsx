@@ -136,58 +136,62 @@ const CityDetailsPage = ({ cityData, detailedForecast }: ICityDetailsPage) => {
     <StyledDetailesPage>
       <div className="weather-app">
         <div className="main-weather-data-container">
-          <div className="inner-container">
-            <div className="temp">{`${Math.round(
-              Number(cityData?.actualTemp)
-            )}°`}</div>
-            <div className="city-name-timezone">
-              <div className="name">{`${cityData?.cityName}, ${cityData?.countryName}`}</div>
-              <small>
-                <div className="timezone">{cityData?.timeZone}</div>
-              </small>
+          {cityData && (
+            <div className="inner-container">
+              <div className="temp">{`${Math.round(
+                Number(cityData.actualTemp)
+              )}°`}</div>
+              <div className="city-name-timezone">
+                <div className="name">{`${cityData.cityName}, ${cityData.countryName}`}</div>
+                <small>
+                  <div className="timezone">{cityData.timeZone}</div>
+                </small>
+              </div>
+              <div className="weather-icon">
+                <img
+                  src={`http://openweathermap.org/img/w/${cityData.icon}.png`}
+                  alt="weather-icon"
+                />
+              </div>
             </div>
-            <div className="weather-icon">
-              <img
-                src={`http://openweathermap.org/img/w/${cityData?.icon}.png`}
-                alt="weather-icon"
-              />
-            </div>
-          </div>
+          )}
           {tooltipToggle ? weatherBarChart : weatherBarChartWithTooltip}
         </div>
-        <div className="panel glass-texture">
-          <div className="weather-details-header">Weather Details</div>
-          <ul className="details">
-            <li>
-              <span>Feels like:</span>
-              <span className="feel-tempterature">{` ${cityData?.feelTemp}°`}</span>
-            </li>
-            <li>
-              <span>Maximum tempterature:</span>
-              <span className="max-tempterature">{` ${cityData?.temp_max}°`}</span>
-            </li>
-            <li>
-              <span>Minimum tempterature:</span>
-              <span className="min-tempterature">{` ${cityData?.temp_min}°`}</span>
-            </li>
-            <li>
-              <span>Humidity:</span>
-              <span className="humidity">{` ${cityData?.humidity}%`}</span>
-            </li>
-            <li>
-              <span>Clouds:</span>
-              <span className="clouds">{` ${cityData?.clouds}%`}</span>
-            </li>
-            <li>
-              <span>General:</span>
-              <span className="general">{` ${cityData?.weatherDesc}`}</span>
-            </li>
-            <li>
-              <span>Wind:</span>
-              <span className="wind">{` ${cityData?.wind} meter/sec`}</span>
-            </li>
-          </ul>
-        </div>
+        {cityData && (
+          <div className="panel glass-texture">
+            <div className="weather-details-header">Weather Details</div>
+            <ul className="details">
+              <li>
+                <span>Feels like:</span>
+                <span className="feel-tempterature">{` ${cityData.feelTemp}°`}</span>
+              </li>
+              <li>
+                <span>Maximum tempterature:</span>
+                <span className="max-tempterature">{` ${cityData.temp_max}°`}</span>
+              </li>
+              <li>
+                <span>Minimum tempterature:</span>
+                <span className="min-tempterature">{` ${cityData.temp_min}°`}</span>
+              </li>
+              <li>
+                <span>Humidity:</span>
+                <span className="humidity">{` ${cityData.humidity}%`}</span>
+              </li>
+              <li>
+                <span>Clouds:</span>
+                <span className="clouds">{` ${cityData.clouds}%`}</span>
+              </li>
+              <li>
+                <span>General:</span>
+                <span className="general">{` ${cityData.weatherDesc}`}</span>
+              </li>
+              <li>
+                <span>Wind:</span>
+                <span className="wind">{` ${cityData.wind} meter/sec`}</span>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
       {isLoading && <FullScreenLoader />}
     </StyledDetailesPage>
