@@ -19,10 +19,20 @@ const StyledDetailesPage = styled.div`
     position: relative;
     z-index: 0;
     display: flex;
+    ::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.2);
+    }
     @media screen and (max-width: 1000px) {
       flex-direction: column;
     }
     .main-weather-data-container {
+      z-index: 10;
       width: calc(100% - 350px);
       display: flex;
       flex-direction: column-reverse;

@@ -6,6 +6,7 @@ const StyledWeatherWrapper = styled.div`
   padding: 80px 20px 20px;
   width: 100%;
   box-sizing: border-box;
+  z-index: 10;
 
   .no-cards-placeholder {
     width: 100%;
@@ -16,6 +17,7 @@ const StyledWeatherWrapper = styled.div`
     color: white;
   }
   .card__wrapper {
+    z-index: 100;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

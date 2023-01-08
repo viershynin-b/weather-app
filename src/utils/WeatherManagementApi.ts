@@ -22,8 +22,8 @@ export const getLocalWeather = async (
     if (res.status === 200) {
       const getIANATimezone = (utcOffsetSeconds: number) => {
         const utcOffsetHours = Math.abs(utcOffsetSeconds / 3600);
-        const sign = utcOffsetSeconds < 0 ? "+" : "-";
-        return `GMT ${sign}${utcOffsetHours}`;
+        const sign = utcOffsetSeconds > 0 ? "+" : "-";
+        return utcOffsetHours ? `GMT ${sign}${utcOffsetHours}` : 'GMT';
       };
 
       const localTimeZone = getIANATimezone(res.data.timezone);
