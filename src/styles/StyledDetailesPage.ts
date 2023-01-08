@@ -107,6 +107,7 @@ const StyledDetailesPage = styled.div`
             border-radius: 5px;
             cursor: pointer;
             transition: all 1.5s;
+            will-change: transform;
             @media screen and (max-width: 1000px) {
               font-size: 10px;
             }

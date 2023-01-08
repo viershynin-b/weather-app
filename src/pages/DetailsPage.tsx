@@ -5,7 +5,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import urlSlug from 'url-slug';
 
 import CityDetailsPage from "../components/Weather/CityDetailsPage";
-import { FullScreenLoader } from "../components/UI/FullScreenLoader";
 import { getHourlyLocalWeather } from "../utils/WeatherManagementApi";
 import * as Interfaces from "../utils/Interfaces";
 
@@ -68,18 +67,12 @@ const DetailsPage = () => {
     setCurrentCityData(chosenCity);
   };
 
-  return currentCityData && detailedCityForecast ? (
+  return (
     <CityDetailsPage
       cityData={currentCityData}
       detailedForecast={detailedCityForecast}
     />
-  ) : (
-    <StyledDetailesPage>
-      <div className="weather-app">
-        <FullScreenLoader />
-      </div>
-    </StyledDetailesPage>
-  );
+  ) 
 };
 
 export default DetailsPage;
