@@ -8,8 +8,6 @@ import CityDetailsPage from "../components/Weather/CityDetailsPage";
 import { getHourlyLocalWeather } from "../utils/WeatherManagementApi";
 import * as Interfaces from "../utils/Interfaces";
 
-import StyledDetailesPage from "../styles/StyledDetailesPage";
-
 export interface IDetailedForecast {
   temp: number;
   timeData: number;

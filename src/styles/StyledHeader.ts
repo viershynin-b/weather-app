@@ -15,7 +15,6 @@ const StyledHeader = styled.div`
   position: absolute;
   top: 0;
   transition: all 0.3s;
-
   box-shadow: 0px 14px 29px -11px rgba(0, 0, 0, 0.5);
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(7px);

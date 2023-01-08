@@ -92,7 +92,7 @@ const AddLocationModal = ({
         idx !== -1 ? parsedList.splice(idx, 1, city) : parsedList.push(city);
         localStorage.setItem("cityList", JSON.stringify(parsedList));
       } catch (error) {
-        //add notifications
+        console.info(error);
       }
     }
   };

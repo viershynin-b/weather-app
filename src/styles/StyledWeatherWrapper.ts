@@ -7,7 +7,6 @@ const StyledWeatherWrapper = styled.div`
   width: 100%;
   box-sizing: border-box;
   z-index: 10;
-
   .no-cards-placeholder {
     width: 100%;
     text-align: center;

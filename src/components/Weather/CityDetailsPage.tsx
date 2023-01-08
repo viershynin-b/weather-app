@@ -3,7 +3,6 @@ import _ from "lodash";
 import { styled } from "@mui/material/styles";
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import Fade from "@mui/material/Fade";
 
 import * as Interfaces from "../../utils/Interfaces";
 import { IDetailedForecast } from "../../pages/DetailsPage";

@@ -1,5 +1,3 @@
-import React from "react";
-
 import StyledFullScreenLoader from "../../styles/StyledFullScreenLoader";
 import CircularProgress from "@mui/material/CircularProgress";
 

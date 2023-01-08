@@ -17,7 +17,7 @@ function App() {
   const toastifySettings = useAppSelector(
     (state: RootState) => state.weather.toastifySettings
   );
-  
+
   useEffect(() => {
     const cityList = localStorage.getItem("cityList");
 
@@ -67,8 +67,8 @@ function App() {
       const parsedWeather = JSON.parse(stringifiedWeather);
       return parsedWeather;
     } catch (error) {
+      console.info(error);
       return PRIMARY_CITY_LIST;
-      //add notifications
     }
   };
 

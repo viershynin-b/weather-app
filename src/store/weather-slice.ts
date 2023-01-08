@@ -144,7 +144,7 @@ export const weatherSlice = createSlice({
             },
           });
         } catch (error) {
-          // notify
+          console.info(error);
         }
       }
       state.weatherData = state.weatherData.filter(
