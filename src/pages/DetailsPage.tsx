@@ -2,7 +2,7 @@ import { useAppSelector } from "../store/hooks";
 import { RootState } from "../store";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import urlSlug from 'url-slug';
+import urlSlug from "url-slug";
 
 import CityDetailsPage from "../components/Weather/CityDetailsPage";
 import { getHourlyLocalWeather } from "../utils/WeatherManagementApi";
@@ -38,20 +38,6 @@ const DetailsPage = () => {
     }
   }, [currentCityData]);
 
-  const fetchHourlyForecast = async () => {
-    if (currentCityData) {
-      const res = await getHourlyLocalWeather(
-        currentCityData.latitude,
-        currentCityData.longtitude
-      );
-      if (res.success && res.data) {
-        const sortedRes = res.data.slice(0, 16);
-
-        setDetailedCityForecast(sortedRes);
-      }
-    }
-  };
-
   const checkForInvalidQuery = () => {
     const cityName = location.pathname.split("/")[1];
     const idx = weatherList.findIndex(
@@ -65,12 +51,26 @@ const DetailsPage = () => {
     setCurrentCityData(chosenCity);
   };
 
+  const fetchHourlyForecast = async () => {
+    if (currentCityData) {
+      const res = await getHourlyLocalWeather(
+        currentCityData.latitude,
+        currentCityData.longtitude
+      );
+      if (res.success && res.data) {
+        const sortedRes = res.data.slice(0, 16);
+
+        setDetailedCityForecast(sortedRes);
+      }
+    }
+  };
+  
   return (
     <CityDetailsPage
       cityData={currentCityData}
       detailedForecast={detailedCityForecast}
     />
-  ) 
+  );
 };
 
 export default DetailsPage;

@@ -1,4 +1,6 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import urlSlug from "url-slug";
 import {
   CardHeader,
   CardContent,
@@ -8,8 +10,6 @@ import {
 } from "@mui/material";
 import RotateRightIcon from "@mui/icons-material/RotateRight";
 import ClearIcon from "@mui/icons-material/Clear";
-import { useNavigate } from "react-router-dom";
-import urlSlug from "url-slug";
 
 import { useAppDispatch } from "../../store/hooks";
 import {
@@ -20,10 +20,9 @@ import * as Interfaces from "../../utils/Interfaces";
 
 interface ICityCardProps {
   city: Interfaces.ILocalWeatherData;
-  bgURL: string;
 }
 
-const CityCard = ({ city, bgURL }: ICityCardProps) => {
+const CityCard = ({ city }: ICityCardProps) => {
   const refreshIcon = useRef<SVGSVGElement>(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -70,8 +69,8 @@ const CityCard = ({ city, bgURL }: ICityCardProps) => {
         <div className="card-header__wrapper">
           <CardHeader
             title={`${
-              city.cityName.length > 20
-                ? city.cityName.slice(0, 20) + "..."
+              city.cityName.length > 15
+                ? city.cityName.slice(0, 14) + "..."
                 : city.cityName
             }, ${city.countryName}`}
             className="card-header__text"

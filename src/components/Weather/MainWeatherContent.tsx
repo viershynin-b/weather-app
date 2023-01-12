@@ -9,7 +9,6 @@ import { getCityCoordinates } from "../../utils/WeatherManagementApi";
 import { FullScreenLoader } from "../UI/FullScreenLoader";
 import { useAppSelector } from "../../store/hooks";
 import { RootState } from "../../store";
-import  cityDetailsBg from "../../images/city-details-bg.jpg";
 
 import StyledWeatherWrapper from "../../styles/StyledWeatherWrapper";
 
@@ -20,7 +19,7 @@ interface IMainWeatherContent {
 let timerId = 0;
 
 const MainWeatherContent = ({ weatherList }: IMainWeatherContent) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isDropDownListLoading, setIsDropDownListLoading] = useState(true);
   const [isModalOpen, setModalOpen] = useState(false);
   const [newCityName, setNewCityName] = useState("");
   const [chosenCity, setChosenCity] = useState<Interfaces.ICityList | null>(
@@ -44,7 +43,7 @@ const MainWeatherContent = ({ weatherList }: IMainWeatherContent) => {
 
     if (response.success && response.data) {
       setCitySearchResults(response.data);
-      setIsLoading(false);
+      setIsDropDownListLoading(false);
     }
   };
 
@@ -81,33 +80,30 @@ const MainWeatherContent = ({ weatherList }: IMainWeatherContent) => {
               key={city.cityName}
               style={{ display: "flex" }}
             >
-              <CityCard
-                city={city}
-                bgURL={cityDetailsBg}
-              />
+              <CityCard city={city} />
             </Grid>
           ))
         ) : (
-          <div className="no-cards-placeholder">No cards left for preview</div>
+          <div className="no-cards-placeholder">No cards available for preview</div>
         )}
-        <Button
-          variant="contained"
-          className="add-city-btn"
-          onClick={() => setModalOpen(true)}
-        >
-          Add location
-        </Button>
       </Grid>
+      <Button
+        variant="contained"
+        className="add-city-btn"
+        onClick={() => setModalOpen(true)}
+      >
+        Add location
+      </Button>
       <AddLocationModal
         open={isModalOpen}
-        isLoading={isLoading}
+        isDropDownListLoading={isDropDownListLoading}
         value={newCityName}
         chosenCity={chosenCity}
         citySearchResults={citySearchResults}
         handleClose={modalCloseHandler}
         handleInputChange={handleTextInputChange}
         handleChosenCityReset={() => setChosenCity(null)}
-        handleLoadingReset={() => setIsLoading(true)}
+        relaunchDropDownListLoading={() => setIsDropDownListLoading(true)}
       />
       {bulkRequestStatus !== "fulfilled" && <FullScreenLoader />}
     </StyledWeatherWrapper>

@@ -17,14 +17,14 @@ interface ICityDetailsPage {
 const CityDetailsPage = ({ cityData, detailedForecast }: ICityDetailsPage) => {
   const [minTemp, setMinTemp] = useState<number | null>(null);
   const [maxTemp, setMaxTemp] = useState<number | null>(null);
-  const [isLoading, setLoading] = useState(true);
-  const [tooltipToggle, setTooltipToggle] = useState(true);
+  const [isPageContentLoading, setIsPageContentLoading] = useState(true);
+  const [isTooptipAvailable, setIsTooltipAvailable] = useState(false);
 
   useEffect(() => {
     if (cityData && detailedForecast) {
-      setLoading(false);
+      setIsPageContentLoading(false);
       setTimeout(() => {
-        setTooltipToggle(false);
+        setIsTooltipAvailable(true);
       }, 1500);
     }
   }, [cityData, detailedForecast]);
@@ -43,17 +43,19 @@ const CityDetailsPage = ({ cityData, detailedForecast }: ICityDetailsPage) => {
     }
   }, [detailedForecast]);
 
-  const getPositionProperty = (temp: number) => {
+  const getWeatherBarHeight = (temp: number) => {
     let barHeight = "";
     if (maxTemp && minTemp) {
+      const range = maxTemp - minTemp
       const magnitude = temp - minTemp;
-      const relToMaxMagnitude = (magnitude * 89) / (maxTemp - minTemp);
+      const barHeightPxOffset = 11
+      const relToMaxMagnitude = (magnitude * (100 - barHeightPxOffset)) / range;
       barHeight = relToMaxMagnitude.toFixed(2) + "%";
     }
     return barHeight;
   };
 
-  const dataBuilder = (requestedFormat: string, unix: number) => {
+  const getDescriptiveDateString = (requestedFormat: string, unix: number) => {
     const time = new Date(unix).getHours() + ":00";
     const options: Intl.DateTimeFormatOptions = {
       weekday: "long",
@@ -90,7 +92,7 @@ const CityDetailsPage = ({ cityData, detailedForecast }: ICityDetailsPage) => {
                   1
                 )}°`}</Typography>
                 <Typography color="inherit">
-                  {dataBuilder("timeData", el.timeData)}
+                  {getDescriptiveDateString("timeData", el.timeData)}
                 </Typography>
               </>
             }
@@ -98,14 +100,14 @@ const CityDetailsPage = ({ cityData, detailedForecast }: ICityDetailsPage) => {
             <div
               className="weather-bar glass-texture"
               style={{
-                bottom: getPositionProperty(el.temp),
+                bottom: getWeatherBarHeight(el.temp),
               }}
             >
               {el.temp.toFixed(1)}
             </div>
           </HtmlTooltip>
           <span className="forecast-time">
-            {dataBuilder("time", el.timeData)}
+            {getDescriptiveDateString("time", el.timeData)}
           </span>
         </div>
       ))}
@@ -119,13 +121,13 @@ const CityDetailsPage = ({ cityData, detailedForecast }: ICityDetailsPage) => {
           <div
             className="weather-bar glass-texture"
             style={{
-              bottom: getPositionProperty(el.temp),
+              bottom: getWeatherBarHeight(el.temp),
             }}
           >
             {el.temp.toFixed(1)}
           </div>
           <span className="forecast-time">
-            {dataBuilder("time", el.timeData)}
+            {getDescriptiveDateString("time", el.timeData)}
           </span>
         </div>
       ))}
@@ -155,7 +157,7 @@ const CityDetailsPage = ({ cityData, detailedForecast }: ICityDetailsPage) => {
               </div>
             </div>
           )}
-          {tooltipToggle ? weatherBarChart : weatherBarChartWithTooltip}
+          {isTooptipAvailable ? weatherBarChartWithTooltip : weatherBarChart}
         </div>
         {cityData && (
           <div className="panel glass-texture">
@@ -193,7 +195,7 @@ const CityDetailsPage = ({ cityData, detailedForecast }: ICityDetailsPage) => {
           </div>
         )}
       </div>
-      {isLoading && <FullScreenLoader />}
+      {isPageContentLoading && <FullScreenLoader />}
     </StyledDetailesPage>
   );
 };

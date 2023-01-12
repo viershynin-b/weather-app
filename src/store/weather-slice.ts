@@ -10,19 +10,19 @@ export enum SliceStatusEnum {
   INIT = "",
 }
 
-interface ItoastifySettings {
+interface IToastifySettings {
   type: string;
   message: string;
 }
 
-interface IinitialState {
+interface IInitialState {
   weatherData: Interfaces.ILocalWeatherData[];
   singleRequestStatus: SliceStatusEnum;
   bulkRequestStatus: SliceStatusEnum;
-  toastifySettings: ItoastifySettings;
+  toastifySettings: IToastifySettings;
 }
 
-const initialState: IinitialState = {
+const initialState: IInitialState = {
   weatherData: [
     {
       cityName: "",

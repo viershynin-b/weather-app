@@ -19,39 +19,39 @@ import * as Interfaces from "../../utils/Interfaces";
 
 interface IAddLocationModal {
   open: boolean;
-  isLoading: boolean;
+  isDropDownListLoading: boolean;
   value: string;
   citySearchResults: Interfaces.ICityList[];
   chosenCity: Interfaces.ICityList | null;
   handleClose: () => void;
   handleInputChange: (inputText: string, city?: Interfaces.ICityList) => void;
   handleChosenCityReset: () => void;
-  handleLoadingReset: () => void;
+  relaunchDropDownListLoading: () => void;
 }
 
 const AddLocationModal = ({
   open,
-  isLoading,
+  isDropDownListLoading,
   value,
   citySearchResults,
   chosenCity,
   handleClose,
   handleInputChange,
   handleChosenCityReset,
-  handleLoadingReset,
+  relaunchDropDownListLoading,
 }: IAddLocationModal) => {
   const cityInputRef = useRef<HTMLInputElement>(null);
   const cityDropDownListRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (value.length < 2) {
+    if (value) {
       setOptionsCoordinates();
     }
   }, [value]);
 
   useEffect(() => {
     toggleDropDownVisibility();
-  }, [chosenCity]);
+  }, [chosenCity, value]);
 
   const dispatch = useAppDispatch();
 
@@ -100,9 +100,9 @@ const AddLocationModal = ({
   const toggleDropDownVisibility = () => {
     const list = cityDropDownListRef.current;
     if (list) {
-      chosenCity
-        ? list.classList.remove("visible")
-        : list.classList.add("visible");
+      return value && !chosenCity
+        ? list.classList.add("visible")
+        : list.classList.remove("visible");
     }
   };
 
@@ -112,11 +112,7 @@ const AddLocationModal = ({
 
     if (input && list) {
       list.style.top = input.getBoundingClientRect().bottom + 20 + "px";
-      if (value && !list.classList.contains("visible")) {
-        list.classList.add("visible");
-      } else if (!value) {
-        list.classList.remove("visible");
-      }
+      toggleDropDownVisibility();
     }
   };
 
@@ -128,13 +124,13 @@ const AddLocationModal = ({
   };
 
   const dropDownListBuilder = () => {
-    if (isLoading) return <LinearProgress />;
+    if (isDropDownListLoading) return <LinearProgress />;
 
     return citySearchResults.length ? (
       citySearchResults.map((el) => (
         <div
           className="drop-down-city-list__item"
-          key={String(el.lat + el.lon)}
+          key={`${el.lat},${el.lon}, ${Math.random()}`}
           onClick={() => dropDownClickHandler(el)}
         >{`${el.name}, ${el.state ? el.state + ", " : ""}${el.country}`}</div>
       ))
@@ -148,10 +144,10 @@ const AddLocationModal = ({
   const inputValueChangeHandler = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
-    handleInputChange(e.target.value);
     handleChosenCityReset();
+    handleInputChange(e.target.value);
     if (e.target.value) {
-      handleLoadingReset();
+      relaunchDropDownListLoading();
     }
   };
 
