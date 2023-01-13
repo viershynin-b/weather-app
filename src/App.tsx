@@ -77,10 +77,8 @@ function App() {
       <MainHeader />
       <Routes>
         <Route path="/weather-app" element={<MainPage />} />
-        // line above is a work-around for the git-pages specific URL
-        <Route path="/" element={<MainPage />} />
         <Route path={"/:cityName"} element={<DetailsPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<Navigate to="/weather-app" replace />} />
       </Routes>
       <ToastContainer
         position="bottom-right"
