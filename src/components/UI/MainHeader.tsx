@@ -10,7 +10,7 @@ const MainHeader = () => {
   return (
     <StyledHeader>
       OpenWeather
-      {location.pathname.length !== 1 && (
+      {!location.pathname.includes("weather-app") && (
         <HomeIcon
           fontSize="large"
           className="header-icon"
